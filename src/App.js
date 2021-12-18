@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import { makeStyles } from '@material-ui/core'
+import { BrowserRouter, Route } from 'react-router-dom'
+import Header from './components/Header'
+import HomePage from './pages/Homepage'
+import CoinPage from './pages/Coinpage'
+
+const useStyles = makeStyles(() => ({
+  // we want our App to change
+  App: {
+    backgroundColor: '#14161a',
+    color: 'white',
+    minHeight: '100vh',
+  },
+}))
 
 function App() {
+  const classes = useStyles()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      {/* // classes.x    ,  x=thing we want to change in above usestyle we wrote x = App */}
+      <div className={classes.App}>
+        <Header />
+        <Route path='/' component={HomePage} exact />
+        <Route path='/coins/:id' component={CoinPage} />
+      </div>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
